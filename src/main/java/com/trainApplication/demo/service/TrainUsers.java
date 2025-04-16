@@ -1,19 +1,22 @@
 package com.trainApplication.demo.service;
 
 import com.trainApplication.demo.model.User;
+import com.trainApplication.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TrainUsers {
+    @Autowired
+    private UserRepository userRepository;
 
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<>();
-        //connessione db
-        users.add(new User("waleed","arain","23","M","something"));
-        users.add(new User("cristian","alloggio","30","M","something"));
-        return users;
+        return userRepository.findAll();
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 }

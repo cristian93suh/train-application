@@ -5,9 +5,7 @@ import com.trainApplication.demo.service.TrainUsers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,8 +16,14 @@ public class TrainAPI {
     private TrainUsers trainUsers;
 
     @GetMapping()
-    public ResponseEntity<Object> getUsers(){
-        List<User> user = trainUsers.getAllUsers();
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> users = trainUsers.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity<String> addUser(@RequestBody User user) {
+        trainUsers.saveUser(user);
+        return new ResponseEntity<>("User created successfully", HttpStatus.CREATED);
     }
 }

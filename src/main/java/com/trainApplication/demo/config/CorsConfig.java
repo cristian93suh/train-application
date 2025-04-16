@@ -1,4 +1,4 @@
-package com.springangularpoc.config;
+package com.trainApplication.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
